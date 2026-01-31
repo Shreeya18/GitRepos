@@ -11,25 +11,20 @@ import com.example.gitrepos.githubRepo.domain.Repo
 import com.example.gitrepos.githubRepo.domain.repository.RepoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class RepoRepositoryImpl(
+class RepoRepositoryImpl @Inject constructor(
     private val api: GithubApi
 ) : RepoRepository {
 
-    override fun searchRepos(
-        query: String
-    ): Flow<PagingData<Repo>> {
-
-        return Pager(
-            config = PagingConfig(
-                pageSize = 20,
-                enablePlaceholders = false
-            ),
+    override fun searchRepos(query: String) =
+        Pager(
+            config = PagingConfig(pageSize = 20),
             pagingSourceFactory = {
                 RepoPagingSource(api, query)
             }
         ).flow.map { pagingData ->
             pagingData.map { it.toDomain() }
         }
-    }
 }
+

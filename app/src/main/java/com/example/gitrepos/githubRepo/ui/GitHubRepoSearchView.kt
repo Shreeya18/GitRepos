@@ -28,12 +28,12 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.example.gitrepos.githubRepo.domain.Repo
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.gitrepos.githubRepo.ui.viewModel.RepoViewModel
 
 @Composable
-fun RepoSearchScreen(
-    viewModel: RepoViewModel = hiltViewModel()
+fun GitHubRepoSearchView(
+    viewModel: RepoViewModel = hiltViewModel(),
+    modifier: Modifier = Modifier
 ) {
     val repos = viewModel.repos.collectAsLazyPagingItems()
     var query by remember { mutableStateOf("") }

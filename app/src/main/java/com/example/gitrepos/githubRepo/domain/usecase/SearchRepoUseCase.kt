@@ -5,10 +5,12 @@ import com.example.gitrepos.githubRepo.domain.Repo
 import com.example.gitrepos.githubRepo.domain.repository.RepoRepository
 import kotlinx.coroutines.flow.Flow
 
-class SearchReposUseCase(
+import javax.inject.Inject
+
+class SearchReposUseCase @Inject constructor(
     private val repository: RepoRepository
 ) {
-    operator fun invoke(query: String): Flow<PagingData<Repo>> {
-        return repository.searchRepos(query)
-    }
+    operator fun invoke(query: String) =
+        repository.searchRepos(query)
 }
+
